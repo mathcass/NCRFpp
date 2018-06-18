@@ -9,7 +9,11 @@ import sys
 import numpy as np
 from .alphabet import Alphabet
 from .functions import *
-import cPickle as pickle
+
+try:
+    import cPickle as pickle
+except ModuleNotFoundError:
+    import pickle as pickle
 
 
 START = "</s>"
@@ -201,7 +205,7 @@ class Data:
         for line in in_lines:
             if len(line) > 2:
                 pairs = line.strip().split()
-                word = pairs[0].decode('utf-8')
+                word = pairs[0]
                 if self.number_normalized:
                     word = normalize_word(word)
                 label = pairs[-1]
